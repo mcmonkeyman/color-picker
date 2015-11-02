@@ -3,7 +3,7 @@ package ie.eoin.sample.colorpicker.model.collections
 import scala.collection.mutable.Queue
 import ie.eoin.sample.colorpicker.model.{Color, ColorValue}
 
-class RegeneratingColorColllection(val initialSize: Int) {
+class RegeneratingColorCollection(val initialSize: Int) {
 
   val minimumAllowedSize = 20
   var queue: Queue[Color] = new Queue()

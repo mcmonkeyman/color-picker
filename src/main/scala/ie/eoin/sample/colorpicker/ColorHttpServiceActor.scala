@@ -27,7 +27,7 @@ class ColorHttpServiceActor extends Actor with ColorHttpService {
       case e: ColorServiceException =>
         requestUri { uri =>
           log.warning("Request to {} could not be handled normally", uri)
-          complete(InternalServerError, e.smth)
+          complete(InternalServerError, e.message)
         }
     }
 

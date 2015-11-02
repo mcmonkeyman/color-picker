@@ -1,2 +1,2 @@
 package ie.eoin.sample.colorpicker.exception
-case class ColorServiceException(smth:String)  extends Exception
+case class ColorServiceException(message:String)  extends Exception

@@ -7,7 +7,7 @@ import ie.eoin.sample.colorpicker.model.collections._
 import ie.eoin.sample.colorpicker.exception._
 
 class ColorService(val numberOfColors:Int) {
-  var colorCollection = new RegeneratingColorColllection(numberOfColors) 
+  var colorCollection = new RegeneratingColorCollection(numberOfColors) 
   var checkedOutColors:  scala.collection.mutable.Map[SessionId, Color] =  scala.collection.mutable.Map()
   var savedColorCollection = new SavedColorCollection()
   val timeout = 15000
