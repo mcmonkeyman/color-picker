@@ -3,7 +3,7 @@
 ## About 
 
 This project was based on a spray template at https://github.com/spray/spray-template.
-It allows a user to checkout a random color and then save that color within the timeout period, 15 seconds. 
+It allows a user to check out a random color and then save that color within the timeout period, 15 seconds. 
 
 ## How to run
 
