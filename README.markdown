@@ -44,6 +44,20 @@ curl http://localhost:8080/color/4d04b88%3A150c42d94c2%3A-7ffe
 ```
 curl -XPOST http://localhost:8080/color/4d04b88%3A150c42d94c2%3A-7ffe
 ```
+```
+{
+  "red": {
+    "colorValue": "215"
+  },
+  "green": {
+    "colorValue": "152"
+  },
+  "blue": {
+    "colorValue": "40"
+  }
+}
+```
+
 * View last saved color for user:
 ```
 curl http://localhost:8080/color/latest/4d04b88%3A150c42d94c2%3A-7ffe

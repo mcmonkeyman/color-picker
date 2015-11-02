@@ -11,7 +11,7 @@ class ColorService(val numberOfColors:Int) {
   var savedColorCollection = new SavedColorCollection()
   val timeout = 15000
 
-  def checkOutColor(id: SessionId) = {
+  def checkOutColor(id: SessionId): Color = {
     if(clientHasColorCheckedOut(id)) {
       throw new ColorServiceException("Can't check out a color, this client currently already has a color checked out for this session")
     } else {
@@ -22,9 +22,11 @@ class ColorService(val numberOfColors:Int) {
     }
   }
 
-  def saveCheckedOutColor(id: SessionId) = {
+  def saveCheckedOutColor(id: SessionId): Color = {
     if(clientHasColorCheckedOut(id)) {
-      savedColorCollection.add(id, checkedOutColors.get(id).get)
+      val color = checkedOutColors.get(id).get
+      savedColorCollection.add(id, color)
+      color 
     } else {
       throw new ColorServiceException("Can't set a color, this client does not have a color for this session")
     }

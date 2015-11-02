@@ -48,7 +48,6 @@ trait ColorHttpService extends HttpService {
       post {
         complete {
           colorService.saveCheckedOutColor(SessionId(id))
-          SessionId(id)
         }
       }
     } ~
