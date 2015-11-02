@@ -1,16 +1,19 @@
 package ie.eoin.sample.colorpicker
 
 import akka.actor.Actor
+import spray.util.LoggingContext
 import spray.routing._
 import spray.http._
+import spray.http.StatusCodes._
 import spray.httpx.unmarshalling._
 import spray.httpx.marshalling._
 import spray.httpx.SprayJsonSupport._
 import spray.json._
 import spray.json.DefaultJsonProtocol._
-import ie.eoin.sample.colorpicker.serialization._
 import ie.eoin.sample.colorpicker.model._
 import ie.eoin.sample.colorpicker.service._
+import ie.eoin.sample.colorpicker.exception._
+import ie.eoin.sample.colorpicker.serialization._
 import ie.eoin.sample.colorpicker.serialization.SessionIdJsonImplicits._
 import ie.eoin.sample.colorpicker.serialization.ColorJsonImplicits._
 import ie.eoin.sample.colorpicker.serialization.ColorValueJsonImplicits._
@@ -18,6 +21,15 @@ import ie.eoin.sample.colorpicker.serialization.ColorValueJsonImplicits._
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
 class ColorHttpServiceActor extends Actor with ColorHttpService {
+
+  implicit def colorExceptionHandler(implicit log: LoggingContext) =
+    ExceptionHandler {
+      case e: ColorServiceException =>
+        requestUri { uri =>
+          log.warning("Request to {} could not be handled normally", uri)
+          complete(InternalServerError, e.smth)
+        }
+    }
 
   // the HttpService trait defines only one abstract member, which
   // connects the services environment to the enclosing actor or test

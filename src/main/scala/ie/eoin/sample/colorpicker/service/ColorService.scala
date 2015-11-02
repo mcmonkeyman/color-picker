@@ -4,6 +4,7 @@ import concurrent._
 import scala.concurrent.ExecutionContext.Implicits.global
 import ie.eoin.sample.colorpicker.model._
 import ie.eoin.sample.colorpicker.model.collections._
+import ie.eoin.sample.colorpicker.exception._
 
 class ColorService(val numberOfColors:Int) {
   var colorCollection = new RegeneratingColorColllection(numberOfColors) 
@@ -13,7 +14,7 @@ class ColorService(val numberOfColors:Int) {
 
   def checkOutColor(id: SessionId): Color = {
     if(clientHasColorCheckedOut(id)) {
-      throw new ColorServiceException("Can't check out a color, this client currently already has a color checked out for this session")
+      throw new ColorServiceException("Can't check out a color, this client currently already has a color checked out. A client can only check out one color at a time.")
     } else {
       val color = colorCollection.getNextRandomColor()  
       checkedOutColors.put(id, color)
@@ -28,7 +29,7 @@ class ColorService(val numberOfColors:Int) {
       savedColorCollection.add(id, color)
       color 
     } else {
-      throw new ColorServiceException("Can't set a color, this client does not have a color for this session")
+      throw new ColorServiceException("Can't set a color, this client does not have a color checked out.")
     }
   }
 
@@ -55,4 +56,3 @@ class ColorService(val numberOfColors:Int) {
 }
 
 
-case class ColorServiceException(smth:String)  extends Exception
