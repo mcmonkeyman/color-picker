@@ -11,7 +11,7 @@ sbt run
 
 ## Using the service
 
-* Get a session id:
+* Get a client id:
 
 ```
 curl http://localhost:8080/uuid
