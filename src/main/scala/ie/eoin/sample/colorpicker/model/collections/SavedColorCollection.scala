@@ -17,5 +17,4 @@ class SavedColorCollection {
       case _ => None
     } 
   }
-
 }

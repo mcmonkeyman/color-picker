@@ -9,7 +9,7 @@ class ColorService(val numberOfColors:Int) {
   var colorCollection = new RegeneratingColorColllection(numberOfColors) 
   var checkedOutColors:  scala.collection.mutable.Map[SessionId, Color] =  scala.collection.mutable.Map()
   var savedColorCollection = new SavedColorCollection()
-  val timeout = 12000
+  val timeout = 15000
 
   def checkOutColor(id: SessionId) = {
     if(clientHasColorCheckedOut(id)) {
