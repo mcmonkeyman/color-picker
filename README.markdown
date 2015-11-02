@@ -40,7 +40,7 @@ curl http://localhost:8080/color/4d04b88%3A150c42d94c2%3A-7ffe
 }
 ```
 
-* Save a color
+* Save the checked out color
 ```
 curl -XPOST http://localhost:8080/color/4d04b88%3A150c42d94c2%3A-7ffe
 ```
