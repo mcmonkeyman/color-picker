@@ -10,6 +10,7 @@ import spray.httpx.marshalling._
 import spray.httpx.SprayJsonSupport._
 import spray.json._
 import spray.json.DefaultJsonProtocol._
+import com.typesafe.config.ConfigFactory
 import ie.eoin.sample.colorpicker.model._
 import ie.eoin.sample.colorpicker.service._
 import ie.eoin.sample.colorpicker.exception._
@@ -45,8 +46,11 @@ class ColorHttpServiceActor extends Actor with ColorHttpService {
 // this trait defines our service behavior independently from the service actor
 trait ColorHttpService extends HttpService {
 
-  val queueSize = 100
-  val colorService = new ColorService(queueSize)
+  val config = ConfigFactory.load().getConfig("colorservice")
+  val timeout = config.getInt("timeout")
+  val queueSize  = config.getInt("queuesize")
+
+  val colorService = new ColorService(queueSize, timeout)
   val sessionService = new SessionService()
 
   val myRoute =

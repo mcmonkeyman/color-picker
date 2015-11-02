@@ -6,10 +6,8 @@ import ie.eoin.sample.colorpicker.model._
 import ie.eoin.sample.colorpicker.exception._
 import ie.eoin.sample.colorpicker.model.collections._
 
-class CheckedOutColorCollection(sourceCollection: RegeneratingColorCollection) {
-
+class CheckOutManager(sourceCollection: RegeneratingColorCollection, timeout: Int) {
   var checkedOut:  scala.collection.mutable.Map[SessionId, Color] =  scala.collection.mutable.Map()
-  val timeout = 15000
 
   def checkOut(id:SessionId) = {
     if(clientHasColorCheckedOut(id)) {
@@ -18,6 +16,7 @@ class CheckedOutColorCollection(sourceCollection: RegeneratingColorCollection) {
       val color = sourceCollection.getNextRandomColor()  
       checkedOut.put(id, color)
       releaseColorAfterTimeout(id, color)    
+      color
     }
   }
 
@@ -29,7 +28,6 @@ class CheckedOutColorCollection(sourceCollection: RegeneratingColorCollection) {
     }
   }
 
-    
   private def clientHasColorCheckedOut(id: SessionId): Boolean = {
     checkedOut.contains(id)
   }
