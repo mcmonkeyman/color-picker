@@ -45,7 +45,8 @@ class ColorHttpServiceActor extends Actor with ColorHttpService {
 // this trait defines our service behavior independently from the service actor
 trait ColorHttpService extends HttpService {
 
-  val colorService = new ColorService(100)
+  val queueSize = 100
+  val colorService = new ColorService(queueSize)
   val sessionService = new SessionService()
 
   val myRoute =
