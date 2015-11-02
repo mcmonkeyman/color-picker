@@ -4,14 +4,14 @@ import scala.collection.mutable.Queue
 import ie.eoin.sample.colorpicker.model._
 
 class SavedColorCollection {
-  var savedColorCollection: Queue[(SessionId, Color)] = new Queue()
+  var savedColorCollection: Queue[(ClientId, Color)] = new Queue()
 
-  def add(id:SessionId, color:Color) = {
+  def add(id:ClientId, color:Color) = {
     savedColorCollection.enqueue((id, color))  
     color
   }
 
-  def showLastSavedColor(id: SessionId): Option[Color]  = {
+  def showLastSavedColor(id: ClientId): Option[Color]  = {
     savedColorCollection.toList.reverse.find(_._1 == id) match {
       case Some(s) => Some(s._2)
       case _ => None

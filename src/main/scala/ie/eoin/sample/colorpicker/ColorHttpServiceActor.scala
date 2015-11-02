@@ -15,7 +15,7 @@ import ie.eoin.sample.colorpicker.model._
 import ie.eoin.sample.colorpicker.service._
 import ie.eoin.sample.colorpicker.exception._
 import ie.eoin.sample.colorpicker.serialization._
-import ie.eoin.sample.colorpicker.serialization.SessionIdJsonImplicits._
+import ie.eoin.sample.colorpicker.serialization.ClientIdJsonImplicits._
 import ie.eoin.sample.colorpicker.serialization.ColorJsonImplicits._
 import ie.eoin.sample.colorpicker.serialization.ColorValueJsonImplicits._
 
@@ -51,32 +51,32 @@ trait ColorHttpService extends HttpService {
   val queueSize  = config.getInt("queuesize")
 
   val colorService = new ColorService(queueSize, timeout)
-  val sessionService = new SessionService()
+  val sessionService = new ClientService()
 
   val myRoute =
     path("color" / Segment) { id =>
       get {
         complete {
-          colorService.checkOutColor(SessionId(id))
+          colorService.checkOutColor(ClientId(id))
         }
       }
     } ~
     path("color" /  Segment) { id =>
       post {
         complete {
-          colorService.saveCheckedOutColor(SessionId(id))
+          colorService.saveCheckedOutColor(ClientId(id))
         }
       }
     } ~
     path("color" / "latest" / Segment) { id =>
       get {
-        complete(colorService.showLastSavedColor(SessionId(id)))
+        complete(colorService.showLastSavedColor(ClientId(id)))
       }
     } ~
     path("uuid") {
       get {
         complete {
-          sessionService.generateUserSessionId
+          sessionService.generateClientId
         }
       }
     }

@@ -9,17 +9,17 @@ class ColorService(val numberOfColors:Int, val timeout: Int) {
   var savedColorCollection = new SavedColorCollection()
   var checkOutManager = new CheckOutManager(colorCollection, timeout)   
 
-  def checkOutColor(id: SessionId): Color = {
+  def checkOutColor(id: ClientId): Color = {
     checkOutManager.checkOut(id)
   }
 
-  def saveCheckedOutColor(id: SessionId): Color = {
+  def saveCheckedOutColor(id: ClientId): Color = {
     val color = checkOutManager.get(id)
     savedColorCollection.add(id, color)
     color 
   }
 
-  def showLastSavedColor(id: SessionId): Option[Color]  = {
+  def showLastSavedColor(id: ClientId): Option[Color]  = {
     savedColorCollection.showLastSavedColor(id)   
   }
 }
