@@ -1,10 +1,12 @@
-# Color Picker Sample
+# Color Picker
 
 This project provides a REST api that  allows a user to check out and save random colors.
 
 # Run
 
+```
 sbt run
+```
 
 # Use
 
