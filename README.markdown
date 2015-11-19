@@ -1,15 +1,13 @@
 # Color Picker Sample
 
-## About 
 
-This project was based on a spray template at https://github.com/spray/spray-template.
-It allows a user to check out a random color and then save that color within the timeout period, 15 seconds. 
+This project provides a REST api that  allows a user to check out and save random colors.
 
-## How to run
+# Run
 
 sbt run
 
-## Using the service
+# Use
 
 * Get a client id:
 
@@ -75,4 +73,6 @@ curl http://localhost:8080/color/latest/4d04b88%3A150c42d94c2%3A-7ffe
   }
 }
 ```
+#About
+This project was based on a spray template at https://github.com/spray/spray-template.
 
